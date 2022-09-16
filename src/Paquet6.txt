@@ -1,0 +1,6 @@
+8 JAUNE
+ChangementDeSens BLEU
+Joker SansCouleur
+PasseTonTour VERT
+Plus2 BLEU
+Plus4 SansCouleur

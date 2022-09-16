@@ -1,0 +1,253 @@
+@startuml
+
+abstract class Carte {
+Carte(Uno uno)
+Carte(Uno uno, Couleur couleur)
+void setUno(Uno uno)
+Uno getUno()
+Couleur getCouleur()
+void setCouleur(Couleur couleur)
+abstract boolean peutEtreRecouverte(Carte c)
+abstract int getValeur()
+abstract int effet()
+boolean estSansCouleur()
+abstract void appliquerEffet()
+boolean estDeCouleurCompatible(Couleur c)
+abstract boolean peutEtrePoseeSur(CarteChiffre c)
+abstract boolean peutEtrePoseeSur(CarteChangementDeSens c)
+abstract boolean peutEtrePoseeSur(CarteJoker c)
+abstract boolean peutEtrePoseeSur(CartePasseTonTour c)
+abstract boolean peutEtrePoseeSur(CartePlus2 c)
+abstract boolean peutEtrePoseeSur(CartePlus4 c)
+abstract String toString()
+}
+
+enum Couleur {
+ROUGE
+VERT
+BLEU
+JAUNE
+String getNom()
+}
+
+class PaquetDeCartes {
+int index
+ArrayList<Carte> getPaquet()
+Carte getCarte(int index)
+void supprimerCarte(int index)
+void ajouter(Carte... cartes)
+int getNombreDeCartes
+boolean estVide()
+int getValeur
+String toString()
+void ajouter(PaquetDeCartes pdc)
+void melanger()
+void retourner()
+Carte getSommet()
+Carte piocher()
+void ecrire(String nomDeFicher) throws ErreurFichier
+void lire(String nomDefichier) throws ErreurFichier
+boolean hasNext()
+Carte next()
+void resetNext()
+String getCouleurCartei(int i)
+}
+
+class Uno {
+int joueurQuiDistribue;
+int joueurQuiJoue;
+boolean sensHoraire;
+Uno()
+void initialiser(int nbJoueurs)
+void creerLesJoueurs(int nbJoueurs)
+int nbJoueurs()
+PaquetDeCartes getPioche()
+void setPioche(PaquetDeCartes pioche)
+PaquetDeCartes getDefausse()
+void setDefausse(PaquetDeCartes defausse)
+void distribuerCartes()
+void choisirQuiDistribue()
+int getJoueurQuiDistribue()
+void choisirQuiJoue()
+int getJoueurQuiJoue()
+void setJoueurQuiJoue(int joueurQuiJoue)
+Joueur getJoueuri(int i)
+void changerSensDuJeu()
+void changerDeJoueur()
+void distribueCartesEnPlus(int nbCartes)
+boolean isSensHoraire()
+void jeu()
+void setDialogue(DialogueLigneDeCommande dialogue)
+boolean partieEstFinie()
+Carte getSommetDefausse()
+int nbCartesJoueurActuel()
+void setCouleurAleatoireSommetDefausse()
+Joueur getJoueurActuel()
+DialogueLigneDeCommande getDialogue()
+}
+
+class FabriqueCartes << (S,#FF7700) >> {
+static FabriqueCartes getInstance()
+PaquetDeCartes getPaquetVide()
+PaquetDeCartes getPaquet1CarteDeChaque(Uno uno)
+PaquetDeCartes getPaquetUno(Uno uno)
+}
+
+class CarteChiffre {
+int numero
+CarteChiffre(Uno uno, Couleur couleur, int num)
+void setNumero(int numero)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c) 
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c) 
+String toString()
+}
+
+class CarteChangementDeSens {
+CarteChangementDeSens(Uno uno, Couleur couleur)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c)
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c)
+String toString()
+}
+
+class CarteJoker {
+CarteJoker(Uno uno)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c)
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c)
+String toString()
+}
+
+class CartePasseTonTour {
+CartePasseTonTour(Uno uno, Couleur couleur)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c)
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c)
+String toString()
+}
+
+class CartePlus2 {
+CartePlus2(Uno uno, Couleur couleur)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c)
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c)
+String toString()
+}
+
+class CartePlus4 {
+CartePlus4(Uno uno)
+boolean peutEtreRecouverte(Carte c)
+int getValeur()
+int effet()
+void appliquerEffet()
+boolean peutEtrePoseeSur(CarteChiffre c)
+boolean peutEtrePoseeSur(CarteChangementDeSens c)
+boolean peutEtrePoseeSur(CarteJoker c)
+boolean peutEtrePoseeSur(CartePasseTonTour c)
+boolean peutEtrePoseeSur(CartePlus2 c)
+boolean peutEtrePoseeSur(CartePlus4 c)
+String toString()
+}
+
+class Main {
+static void main(String[] args)
+}
+
+class DialogueLigneDeCommande {
+DialogueLigneDeCommande(Uno uno)
+void mettreAJour()
+void printPasseTonTour()
+void printPioche()
+}
+
+class CoupIncorrect {
+CoupIncorrect(String message)
+}
+
+class ErreurFichier {
+ErreurFichier(String message)
+}
+
+abstract class Joueur  {
+String nom
+int numero
+Joueur (Uno uno, PaquetDeCartes paquetDeCartes, int numero)
+String getNom()
+void setPaquetDeCartes(PaquetDeCartes paquetDeCartes)
+String toString()
+PaquetDeCartes getPaquetDeCartes()
+abstract void jouer(String coup) throws CoupIncorrect
+int getScore()
+abstract boolean estHumain()
+void piocherDansPioche()
+}
+
+class JoueurHumain {
+JoueurHumain(Uno uno, PaquetDeCartes paquetDeCartes, int no, String nom)
+Carte carteChoisie(String coup) throws CoupIncorrect
+void jouer(String coup) throws CoupIncorrect
+boolean estHumain()
+}
+
+class Bot {
+Bot(Uno uno, PaquetDeCartes paquetDeCartes, int no)
+void jouer(String coup)
+boolean estHumain()
+}
+
+Main "utilise" -- Uno
+Uno "1" -- "*" Joueur
+Uno "1" -- "1" DialogueLigneDeCommande
+Uno "1" -- FabriqueCartes
+Uno "1" -- Carte
+Uno -- "2" PaquetDeCartes
+DialogueLigneDeCommande "utilise" -- CoupIncorrect
+Joueur <|-- JoueurHumain
+Joueur <|-- Bot
+Joueur -- "1" PaquetDeCartes
+PaquetDeCartes -- "*" Carte
+PaquetDeCartes "utilise" -- ErreurFichier
+Couleur "1" -- Carte
+Carte <|-- CarteChiffre
+Carte <|-- CarteChangementDeSens
+Carte <|-- CarteJoker
+Carte <|-- CartePasseTonTour
+Carte <|-- CartePlus2
+Carte <|-- CartePlus4
+@enduml
